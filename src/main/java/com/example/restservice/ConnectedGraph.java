@@ -38,7 +38,7 @@ public class ConnectedGraph {
 			this.addVertex(source);
 			this.addVertex(destination);
 			this.addEdge(source, destination);
-
+ 
 		}
 		reader.close();
 	}
@@ -48,14 +48,14 @@ public class ConnectedGraph {
 	
 	void addEdge(String label1, String label2) {
 	    Vertex v1 = new Vertex(label1);
-	    Vertex v2 = new Vertex(label2);
+	    Vertex v2 = new Vertex(label2); 
 	    adjVertices.get(v1).add(v2);
 	    adjVertices.get(v2).add(v1);
 	}
 	
 	
 	List<Vertex> getAdjVertices(String label) {
-	    return adjVertices.get(new Vertex(label));
+	    return adjVertices.get(new Vertex(label));  
 	}
 	
 	boolean breadthFirstTraversal(String source, String destination) {
@@ -67,11 +67,7 @@ public class ConnectedGraph {
 	        String vertex = queue.poll();
 	        Vertex d = new Vertex(destination);
 	        for (Vertex v : this.getAdjVertices(vertex)) {        	
-	        	if(v.equals(d)) return true;        	
-	        	if (!visited.contains(v.label)) {
-	                visited.add(v.label);
-	                queue.add(v.label);
-	            }
+	        	if(v.equals(d)) return true;        	        	
 	        }
 	    }
 	    return false;

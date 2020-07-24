@@ -7,7 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 
 
 @SpringBootApplication
-@Slf4j
+@Slf4j 
 public class RestServiceApplication {
 
 	public static void main(String[] args) {

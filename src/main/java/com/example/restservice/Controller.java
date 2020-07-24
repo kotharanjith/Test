@@ -14,8 +14,8 @@ import lombok.extern.slf4j.Slf4j;
 
 
 @RestController
-@Slf4j
-public class Controller {
+@Slf4j  
+public class Controller { 
 	
 	@Autowired
 	ConnectedGraph graph;
@@ -38,7 +38,7 @@ public class Controller {
 		}
 				
 		boolean check = graph.breadthFirstTraversal(origin, destination);
-		return check ? "yest" : "no";
+		return check ? "yes" : "no"; 
 	}
 
 }
