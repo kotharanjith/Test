@@ -1,5 +1,6 @@
 package com.example.restservice;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -26,12 +27,13 @@ public class WebMockTest {
 
 	@MockBean
 	private ConnectedGraph service;
+	
+	Map<Vertex, List<Vertex>> vertices;
 
-	@Test
-	public void yesShouldReturnFromService() throws Exception {
-
-		Map<Vertex, List<Vertex>> vertices = new HashMap<Vertex, List<Vertex>>();
-
+	
+	@BeforeEach
+	public void setUp() {
+		vertices = new HashMap<Vertex, List<Vertex>>();
 		Vertex v1 = new Vertex("Boston");
 		List<Vertex> list1 = new ArrayList<>(); 
 		list1.add(new Vertex("New York"));
@@ -59,6 +61,11 @@ public class WebMockTest {
 		Vertex v6 = new Vertex("New York");
 		List<Vertex> list6 = new ArrayList<>();
 		vertices.put(v6, list6);
+		
+	}
+
+	@Test
+	public void yesShouldReturnFromService() throws Exception {
 
 		when(service.breadthFirstTraversal("Boston", "New York")).thenReturn(true);
 		when(service.getAllVertices()).thenReturn(vertices);
@@ -76,7 +83,6 @@ public class WebMockTest {
 	@Test
 	public void noShouldReturnFromCotrollerForUnknownOrigin() throws Exception {
 
-		Map<Vertex, List<Vertex>> vertices = new HashMap<Vertex, List<Vertex>>();
 		when(service.getAllVertices()).thenReturn(vertices);
 
 		this.mockMvc.perform(get("/connected?origin=Fremont&destination=New York")).andDo(print())
@@ -86,7 +92,6 @@ public class WebMockTest {
 	@Test
 	public void noShouldReturnFromControllerForUnknownDesitnation() throws Exception {
 
-		Map<Vertex, List<Vertex>> vertices = new HashMap<Vertex, List<Vertex>>();
 		when(service.getAllVertices()).thenReturn(vertices);
 
 		this.mockMvc.perform(get("/connected?origin=New York&destination=Fremont")).andDo(print())
