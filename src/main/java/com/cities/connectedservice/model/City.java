@@ -1,11 +1,11 @@
-package com.example.restservice;
+package com.cities.connectedservice.model;
 
 
-public class Vertex {
+public class City {
 	
-	String label;
+	String label; 
     
-	Vertex(String label) {
+	public City(String label) {
         this.label = label;
     }
 
@@ -25,7 +25,7 @@ public class Vertex {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Vertex other = (Vertex) obj;
+		City other = (City) obj;
 		
 		return label.equals(other.label);
 	}
